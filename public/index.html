@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Course Registration System</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Login Section -->
+    <section id="login-section" class="section active">
+      <div class="container">
+        <div class="login-container">
+          <h1>University Course Registration System</h1>
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="student-login">Student Login</button>
+            <button class="tab-btn" data-tab="admin-login">Admin Login</button>
+          </div>
+          
+          <div class="tab-content active" id="student-login">
+            <form id="student-login-form">
+              <div class="form-group">
+                <label for="student-roll">Roll Number</label>
+                <input type="text" id="student-roll" placeholder="Enter your roll number" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+          </div>
+          
+          <div class="tab-content" id="admin-login">
+            <form id="admin-login-form">
+              <div class="form-group">
+                <label for="admin-username">Username</label>
+                <input type="text" id="admin-username" placeholder="Enter username" required>
+              </div>
+              <div class="form-group">
+                <label for="admin-password">Password</label>
+                <input type="password" id="admin-password" placeholder="Enter password" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Student Dashboard Section -->
+    <section id="student-dashboard" class="section">
+      <header class="dashboard-header">
+        <div class="container">
+          <h1>Student Dashboard</h1>
+          <div class="user-info">
+            <span id="student-name">Student Name</span>
+            <button id="student-logout" class="btn btn-sm">Logout</button>
+          </div>
+        </div>
+      </header>
+      
+      <div class="container">
+        <div class="dashboard-grid">
+          <!-- Course Search and Filters -->
+          <div class="dashboard-sidebar">
+            <div class="card">
+              <div class="card-header">
+                <h3>Course Filters</h3>
+              </div>
+              <div class="card-body">
+                <form id="course-filter-form">
+                  <div class="form-group">
+                    <label for="department-filter">Department</label>
+                    <select id="department-filter">
+                      <option value="">All Departments</option>
+                      <option value="CS">Computer Science</option>
+                      <option value="SE">Software Engineering</option>
+                      <option value="EE">Electrical Engineering</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="level-filter">Course Level</label>
+                    <select id="level-filter">
+                      <option value="">All Levels</option>
+                      <option value="100">100 Level</option>
+                      <option value="200">200 Level</option>
+                      <option value="300">300 Level</option>
+                      <option value="400">400 Level</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="time-filter">Time of Day</label>
+                    <select id="time-filter">
+                      <option value="">Any Time</option>
+                      <option value="morning">Morning (8AM-12PM)</option>
+                      <option value="afternoon">Afternoon (12PM-4PM)</option>
+                      <option value="evening">Evening (4PM-8PM)</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>Days of Week</label>
+                    <div class="checkbox-group">
+                      <label><input type="checkbox" name="days" value="monday"> Monday</label>
+                      <label><input type="checkbox" name="days" value="tuesday"> Tuesday</label>
+                      <label><input type="checkbox" name="days" value="wednesday"> Wednesday</label>
+                      <label><input type="checkbox" name="days" value="thursday"> Thursday</label>
+                      <label><input type="checkbox" name="days" value="friday"> Friday</label>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="seats-filter">Available Seats</label>
+                    <select id="seats-filter">
+                      <option value="">Any</option>
+                      <option value="available">Available Seats Only</option>
+                    </select>
+                  </div>
+                  
+                  <button type="reset" class="btn btn-secondary">Reset Filters</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+          <div class="dashboard-main">
+            <!-- Course List -->
+            <div class="card">
+              <div class="card-header">
+                <h3>Available Courses</h3>
+                <div class="search-box">
+                  <input type="text" id="course-search" placeholder="Search courses...">
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="course-list" id="available-courses">
+                
+                </div>
+              </div>
+            </div>
+            
+            <!-- Weekly Schedule -->
+            <div class="card">
+              <div class="card-header">
+                <h3>Weekly Schedule</h3>
+              </div>
+              <div class="card-body">
+                <div class="weekly-schedule" id="schedule-container">
+                  <div class="schedule-header">
+                    <div class="time-column">Time</div>
+                    <div class="day-column">Monday</div>
+                    <div class="day-column">Tuesday</div>
+                    <div class="day-column">Wednesday</div>
+                    <div class="day-column">Thursday</div>
+                    <div class="day-column">Friday</div>
+                  </div>
+                  <div class="schedule-body" id="schedule-body">
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Selected Courses -->
+            <div class="card">
+              <div class="card-header">
+                <h3>Selected Courses</h3>
+              </div>
+              <div class="card-body">
+                <div class="selected-courses" id="selected-courses">
+                </div>
+                <div class="action-buttons">
+                  <button id="register-courses" class="btn btn-primary">Register Courses</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admin Dashboard Section -->
+    <section id="admin-dashboard" class="section">
+      <header class="dashboard-header">
+        <div class="container">
+          <h1>Admin Dashboard</h1>
+          <div class="user-info">
+            <span id="admin-name">Admin Name</span>
+            <button id="admin-logout" class="btn btn-sm">Logout</button>
+          </div>
+        </div>
+      </header>
+      
+      <div class="container">
+        <div class="tabs admin-tabs">
+          <button class="tab-btn active" data-tab="course-management">Course Management</button>
+          <button class="tab-btn" data-tab="student-management">Student Management</button>
+          <button class="tab-btn" data-tab="reports">Reports</button>
+        </div>
+        
+        <!-- Course Management Tab -->
+        <div class="tab-content active" id="course-management">
+          <div class="card">
+            <div class="card-header">
+              <h3>Manage Courses</h3>
+              <button id="add-course-btn" class="btn btn-sm">Add New Course</button>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table" id="courses-table">
+                  <thead>
+                    <tr>
+                      <th>Course Code</th>
+                      <th>Title</th>
+                      <th>Department</th>
+                      <th>Level</th>
+                      <th>Schedule</th>
+                      <th>Seats</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Course Form Modal -->
+          <div id="course-modal" class="modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 id="course-modal-title">Add New Course</h3>
+                <span class="close">&times;</span>
+              </div>
+              <div class="modal-body">
+                <form id="course-form">
+                  <input type="hidden" id="course-id">
+                  <div class="form-group">
+                    <label for="course-code">Course Code</label>
+                    <input type="text" id="course-code" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="course-title">Title</label>
+                    <input type="text" id="course-title" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="course-department">Department</label>
+                    <select id="course-department" required>
+                      <option value="CS">Computer Science</option>
+                      <option value="SE">Software Engineering</option>
+                      <option value="EE">Electrical Engineering</option>
+                      <option value="MS">Management Sciences</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="course-level">Level</label>
+                    <select id="course-level" required>
+                      <option value="100">100 Level</option>
+                      <option value="200">200 Level</option>
+                      <option value="300">300 Level</option>
+                      <option value="400">400 Level</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="course-credits">Credits</label>
+                    <input type="number" id="course-credits" min="1" max="4" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="course-description">Description</label>
+                    <textarea id="course-description" rows="3"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="course-seats">Total Seats</label>
+                    <input type="number" id="course-seats" min="1" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Schedule</label>
+                    <div class="schedule-inputs">
+                      <div class="schedule-day">
+                        <label><input type="checkbox" name="course-days" value="monday"> Monday</label>
+                        <div class="time-inputs">
+                          <input type="time" name="monday-start" disabled>
+                          <span>to</span>
+                          <input type="time" name="monday-end" disabled>
+                        </div>
+                      </div>
+                      <div class="schedule-day">
+                        <label><input type="checkbox" name="course-days" value="tuesday"> Tuesday</label>
+                        <div class="time-inputs">
+                          <input type="time" name="tuesday-start" disabled>
+                          <span>to</span>
+                          <input type="time" name="tuesday-end" disabled>
+                        </div>
+                      </div>
+                      <div class="schedule-day">
+                        <label><input type="checkbox" name="course-days" value="wednesday"> Wednesday</label>
+                        <div class="time-inputs">
+                          <input type="time" name="wednesday-start" disabled>
+                          <span>to</span>
+                          <input type="time" name="wednesday-end" disabled>
+                        </div>
+                      </div>
+                      <div class="schedule-day">
+                        <label><input type="checkbox" name="course-days" value="thursday"> Thursday</label>
+                        <div class="time-inputs">
+                          <input type="time" name="thursday-start" disabled>
+                          <span>to</span>
+                          <input type="time" name="thursday-end" disabled>
+                        </div>
+                      </div>
+                      <div class="schedule-day">
+                        <label><input type="checkbox" name="course-days" value="friday"> Friday</label>
+                        <div class="time-inputs">
+                          <input type="time" name="friday-start" disabled>
+                          <span>to</span>
+                          <input type="time" name="friday-end" disabled>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Prerequisites</label>
+                    <div id="prerequisites-container">
+                    </div>
+                    <button type="button" id="add-prerequisite" class="btn btn-sm">Add Prerequisite</button>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Course</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Student Management Tab -->
+        <div class="tab-content" id="student-management">
+          <div class="card">
+            <div class="card-header">
+              <h3>Manage Student Registrations</h3>
+            </div>
+            <div class="card-body">
+              <div class="search-box">
+                <input type="text" id="student-search" placeholder="Search by roll number...">
+                <button id="search-student-btn" class="btn btn-sm">Search</button>
+              </div>
+              <div id="student-details" class="student-details">
+              </div>
+              <div class="table-responsive">
+                <table class="table" id="student-registrations">
+                  <thead>
+                    <tr>
+                      <th>Course Code</th>
+                      <th>Title</th>
+                      <th>Department</th>
+                      <th>Schedule</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+              <div class="override-section">
+                <h4>Override Registration</h4>
+                <div class="form-group">
+                  <label for="override-course">Add Course</label>
+                  <select id="override-course">
+                    <option value="">Select Course</option>
+                  </select>
+                </div>
+                <button id="add-override" class="btn btn-primary">Add Course to Student</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Reports Tab -->
+        <div class="tab-content" id="reports">
+          <div class="card">
+            <div class="card-header">
+              <h3>Generate Reports</h3>
+            </div>
+            <div class="card-body">
+              <div class="report-options">
+                <div class="report-option">
+                  <h4>Course Registration Report</h4>
+                  <p>List of students registered for a specific course</p>
+                  <div class="form-group">
+                    <label for="report-course">Select Course</label>
+                    <select id="report-course">
+                      <option value="">Select Course</option>
+                    </select>
+                  </div>
+                  <button id="generate-course-report" class="btn btn-primary">Generate Report</button>
+                </div>
+                
+                <div class="report-option">
+                  <h4>Available Seats Report</h4>
+                  <p>List of courses with available seats</p>
+                  <button id="generate-seats-report" class="btn btn-primary">Generate Report</button>
+                </div>
+                
+                <div class="report-option">
+                  <h4>Prerequisites Report</h4>
+                  <p>List of students who have not completed prerequisites</p>
+                  <button id="generate-prerequisites-report" class="btn btn-primary">Generate Report</button>
+                </div>
+              </div>
+              
+              <div id="report-results" class="report-results">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
+  </div>
+
+  <script src="/js/main.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "assignment_2",
+  "version": "1.0.0",
+  "description": "A modern, interactive course registration system for universities built with Node.js, Express, MongoDB, and vanilla JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "mongoose": "^8.12.1",
+    "path": "^0.12.7",
+    "router": "^1.3.8"
+  }
+}
